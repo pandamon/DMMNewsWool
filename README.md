@@ -1,6 +1,9 @@
 # DMMNewsWool
 DMM poitame news 一键薅羊毛
 
-dmmnewswool.js 新闻一键薅羊毛油猴脚本
 
-dmmnewsmobilebypass.js 用于阻止新闻网页检测电脑浏览器
+使用说明：
+
+【腾讯文档】DMM News Wool油猴脚本使用说明
+
+https://docs.qq.com/doc/DZFpwc0NSQ29aRmdR
