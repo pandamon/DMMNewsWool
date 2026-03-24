@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         DMM News Wool
 // @namespace    https://www.bilibili.com/video/BV1GJ411x7h7
-// @version      beta-0.1.0
+// @version      beta-0.1.1
 // @description  One click harvest DMM news wool
 // @author       Pandamon
 // @match        *://www.trepy.jp/sp/
 // @match        *://point-news.jp/sp/
 // @match        *://www.life-n.jp/sp/
 // @match        *://www.news-fan.jp/sp/
+// @match        *://www.ani-lab.jp/sp/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @run-at       document-idle
 // @grant        unsafeWindow
