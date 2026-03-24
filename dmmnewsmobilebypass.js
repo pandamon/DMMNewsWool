@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DMM News Mobile Check Bypass
 // @namespace    https://www.bilibili.com/video/BV1GJ411x7h7
-// @version      beta-0.0.5
+// @version      beta-0.1.1
 // @description  DMM Point News Mobile Check Bypass
 // @author       Pandamon
 // @match        *://www.trepy.jp
@@ -12,9 +12,13 @@
 // @match        *://www.life-n.jp/*
 // @match        *://www.news-fan.jp
 // @match        *://www.news-fan.jp/*
+// @match        *://www.ani-lab.jp
+// @match        *://www.ani-lab.jp/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @run-at       document-start
 // @grant        unsafeWindow
+// @downloadURL  https://raw.githubusercontent.com/pandamon/DMMNewsWool/refs/heads/main/dmmnewsmobilebypass.js
+// @updateURL    https://raw.githubusercontent.com/pandamon/DMMNewsWool/refs/heads/main/dmmnewsmobilebypass.js
 
 // ==/UserScript==
 
