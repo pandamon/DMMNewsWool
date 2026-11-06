@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DMM News Wool
 // @namespace    https://www.bilibili.com/video/BV1GJ411x7h7
-// @version      beta-0.1.1
+// @version      beta-0.1.2
 // @description  One click harvest DMM news wool
 // @author       Pandamon
 // @match        *://www.trepy.jp/sp/
@@ -136,7 +136,8 @@
             return extractNumber(pageNumNode.innerText);
         } else {
             // default number
-            return Math.floor(20+5*Math.random()); 
+            // return Math.floor(20+5*Math.random());
+            return 0; 
         }
     }
 
@@ -145,20 +146,47 @@
         if(bypassedLinkNode){
             return bypassedLinkNode.href;
         } else {
-            return "error";
+            return null;
         }
     }
 
+
+
+
+
     let bypassArticle = async function(articleLink){
+        let getbypassedLinkJmpFinal = async function () {
+            let firstPage = domparser.parseFromString(await getHtmlText(articleLink), 'text/html');
+            let pageNum = extractPageNum(firstPage);
+            let lastPageLink = "/sp/article/index/mode/paging/page/" + pageNum + "/article_id/" + article_id + "?_=" + Date.now();
+            let lastPage = domparser.parseFromString(await getHtmlText(lastPageLink), 'text/html');
+            let bypassedLink = extractBypassedLink(lastPage);
+            return bypassedLink;
+        }
+        let getbypassedLinkByStep = async function () {
+            let bypassedLink = null;
+            let pageNum = 1;
+            let lastPageLink = '';
+            let lastPage = null;
+            while (!bypassedLink){
+                lastPageLink = "/sp/article/index/mode/paging/page/" + pageNum + "/article_id/" + article_id + "?_=" + Date.now();
+                lastPage = domparser.parseFromString(await getHtmlText(lastPageLink), 'text/html');
+                bypassedLink = extractBypassedLink(lastPage);
+                pageNum++;
+            }
+            return bypassedLink;
+        }
+
         // input link, output link
         let articleURL = new URL(articleLink);
         let article_id = articleURL.searchParams.get("article_id");
         let media_id = articleURL.searchParams.get("media_id");
-        let firstPage = domparser.parseFromString(await getHtmlText(articleLink), 'text/html');
-        let pageNum = extractPageNum(firstPage);
-        let lastPageLink = "/sp/article/index/mode/paging/page/"+pageNum+"/article_id/"+article_id;
-        let lastPage = domparser.parseFromString(await getHtmlText(lastPageLink), 'text/html');
-        let bypassedLink = extractBypassedLink(lastPage);
+        let bypassedLink ='';
+        if (articleURL.host == 'point-news.jp'){
+            bypassedLink = await getbypassedLinkByStep();
+        } else {
+            bypassedLink = await getbypassedLinkJmpFinal();
+        }
         // bypassed link example: https://www.trepy.jp/sp/article/page/?article_id=20005310&onetime=4ed858a6b10e246e32d9b4f6d52c8ae7
         let bypassedURL = new URL(bypassedLink);
         let onetime = bypassedURL.searchParams.get("onetime");
