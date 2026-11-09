@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DMM News Wool
 // @namespace    https://www.bilibili.com/video/BV1GJ411x7h7
-// @version      beta-0.1.2
+// @version      beta-0.1.3
 // @description  One click harvest DMM news wool
 // @author       Pandamon
 // @match        *://www.trepy.jp/sp/
@@ -181,12 +181,12 @@
         let articleURL = new URL(articleLink);
         let article_id = articleURL.searchParams.get("article_id");
         let media_id = articleURL.searchParams.get("media_id");
-        let bypassedLink ='';
-        if (articleURL.host == 'point-news.jp'){
-            bypassedLink = await getbypassedLinkByStep();
-        } else {
-            bypassedLink = await getbypassedLinkJmpFinal();
-        }
+        let bypassedLink = await getbypassedLinkByStep();
+        // if (articleURL.host == 'point-news.jp'){
+        //     bypassedLink = await getbypassedLinkByStep();
+        // } else {
+        //     bypassedLink = await getbypassedLinkJmpFinal();
+        // }
         // bypassed link example: https://www.trepy.jp/sp/article/page/?article_id=20005310&onetime=4ed858a6b10e246e32d9b4f6d52c8ae7
         let bypassedURL = new URL(bypassedLink);
         let onetime = bypassedURL.searchParams.get("onetime");
